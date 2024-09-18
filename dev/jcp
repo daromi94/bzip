@@ -5,7 +5,7 @@ usage() {
     exit 64
 }
 
-source_dir="$1"
+readonly source_dir="$1"
 
 if [[ -z "$source_dir" ]]; then
     echo >&2 "jcp: Missing source directory"
@@ -17,7 +17,7 @@ if [[ ! -d "$source_dir" ]]; then
     usage
 fi
 
-dest_dir="$2"
+readonly dest_dir="$2"
 
 if [[ -z "$dest_dir" ]]; then
     echo >&2 "jcp: Missing dest directory"
