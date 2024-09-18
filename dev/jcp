@@ -1,34 +1,39 @@
 #!/bin/bash
 
 usage() {
-    echo >&2 "usage: jcp <source_dir> <dest_dir>"
+    echo "usage: jcp <source_dir> <dest_dir>" >&2
     exit 64
 }
 
 readonly source_dir="$1"
+readonly dest_dir="$2"
 
 if [[ -z "$source_dir" ]]; then
-    echo >&2 "jcp: Missing source directory"
+    echo "jcp: Missing source directory" >&2
+    usage
+fi
+
+if [[ -z "$dest_dir" ]]; then
+    echo "jcp: Missing dest directory" >&2
     usage
 fi
 
 if [[ ! -d "$source_dir" ]]; then
-    echo >&2 "jcp: $source_dir: No such directory"
-    usage
-fi
-
-readonly dest_dir="$2"
-
-if [[ -z "$dest_dir" ]]; then
-    echo >&2 "jcp: Missing dest directory"
-    usage
+    echo "jcp: $source_dir: No such directory" >&2
+    exit 66
 fi
 
 if [[ ! -d "$dest_dir" ]]; then
-    mkdir "$dest_dir"
+    if ! mkdir -p "$dest_dir"; then
+        echo "jcp: $dest_dir: Failed to create dest directory" >&2
+        exit 73
+    fi
 fi
 
-find "$source_dir" -name '*.java' -exec javac {} -d "$dest_dir" \;
+if ! find "$source_dir" -name '*.java' -exec javac {} -d "$dest_dir" \;; then
+    echo "jcp: Compilation failed" >&2
+    exit 70
+fi
 
-echo "jcp: compilation successful: Output in '$dest_dir'"
+echo "jcp: Compilation successful"
 exit 0
