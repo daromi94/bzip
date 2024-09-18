@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  BUILD_DIR: app/build
+  BUILD_DIR: build
   MAIN_CLASS: com.daromi.bzip.Main
 
 tasks:
@@ -15,9 +15,9 @@ tasks:
 
   build:
     vars:
-      SOURCE_DIR: app/src
+      SOURCE_DIR: src
     cmds:
-      - ./compile {{.SOURCE_DIR}} {{.BUILD_DIR}}
+      - ./dev/jcp {{.SOURCE_DIR}} {{.BUILD_DIR}}
 
   run:
     cmds:
