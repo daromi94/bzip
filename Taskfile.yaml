@@ -1,0 +1,24 @@
+version: '3'
+
+vars:
+  BUILD_DIR: app/build
+  MAIN_CLASS: com.daromi.bzip.Main
+
+tasks:
+  default:
+    cmds:
+      - task --list-all
+
+  clean:
+    cmds:
+      - rm -rf {{.BUILD_DIR}}
+
+  build:
+    vars:
+      SOURCE_DIR: app/src
+    cmds:
+      - ./compile {{.SOURCE_DIR}} {{.BUILD_DIR}}
+
+  run:
+    cmds:
+      - java -cp {{.BUILD_DIR}} {{.MAIN_CLASS}}

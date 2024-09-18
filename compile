@@ -1,0 +1,35 @@
+#!/bin/bash
+
+usage() {
+    echo >&2 "usage: compile <source_dir> <dest_dir>"
+    exit 64
+}
+
+source_dir="$1"
+
+if [[ -z "$source_dir" ]]; then
+    echo >&2 "compile: Missing source directory"
+    usage
+fi
+
+if [[ ! -d "$source_dir" ]]; then
+    echo >&2 "compile: $source_dir: No such directory"
+    usage
+fi
+
+dest_dir="$2"
+
+if [[ -z "$dest_dir" ]]; then
+    echo >&2 "compile: Missing dest directory"
+    usage
+fi
+
+if [[ ! -d "$dest_dir" ]]; then
+    mkdir "$dest_dir"
+fi
+
+# TODO: hide output and handle errors
+find "$source_dir" -name '*.java' -exec javac {} -d "$dest_dir" \;
+
+echo "Compilation successful. Output in '$dest_dir'."
+exit 0
