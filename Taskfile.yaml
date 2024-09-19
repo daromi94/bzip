@@ -1,8 +1,14 @@
-version: '3'
+version: "3"
 
 vars:
-  BUILD_DIR: build
+  ARTIFACT_ID: bzip
+  VERSION: 0.1.0
   MAIN_CLASS: com.daromi.bzip.Main
+
+  BUILD_DIR: build
+  CLASS_DIR: "{{.BUILD_DIR}}/classes"
+  LIB_DIR: "{{.BUILD_DIR}}/lib"
+  PKG_FILE: "{{.LIB_DIR}}/{{.ARTIFACT_ID}}-{{.VERSION}}.jar"
 
 tasks:
   default:
@@ -17,8 +23,19 @@ tasks:
     vars:
       SOURCE_DIR: src
     cmds:
-      - ./dev/jcp {{.SOURCE_DIR}} {{.BUILD_DIR}}
+      - ./dev/jcp {{.SOURCE_DIR}} {{.CLASS_DIR}}
 
-  run:
+  package:
+    deps: [build]
     cmds:
-      - java -cp {{.BUILD_DIR}} {{.MAIN_CLASS}}
+      - jar -c -f {{.PKG_FILE}} -e {{.MAIN_CLASS}} -C {{.CLASS_DIR}} .
+
+  build:run:
+    deps: [build]
+    cmds:
+      - java -cp {{.CLASS_DIR}} {{.MAIN_CLASS}}
+
+  package:run:
+    deps: [package]
+    cmds:
+      - java -jar {{.PKG_FILE}}
