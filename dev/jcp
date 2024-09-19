@@ -9,31 +9,31 @@ readonly source_dir="$1"
 readonly dest_dir="$2"
 
 if [[ -z "$source_dir" ]]; then
-    echo "jcp: Missing source directory" >&2
+    echo "jcp: missing source directory" >&2
     usage
 fi
 
 if [[ -z "$dest_dir" ]]; then
-    echo "jcp: Missing dest directory" >&2
+    echo "jcp: missing dest directory" >&2
     usage
 fi
 
 if [[ ! -d "$source_dir" ]]; then
-    echo "jcp: $source_dir: No such directory" >&2
+    echo "jcp: $source_dir: no such directory" >&2
     exit 66
 fi
 
 if [[ ! -d "$dest_dir" ]]; then
     if ! mkdir -p "$dest_dir"; then
-        echo "jcp: $dest_dir: Failed to create dest directory" >&2
+        echo "jcp: $dest_dir: failed to create dest directory" >&2
         exit 73
     fi
 fi
 
 if ! find "$source_dir" -name '*.java' -exec javac {} -d "$dest_dir" \;; then
-    echo "jcp: Compilation failed" >&2
+    echo "jcp: compilation failed" >&2
     exit 70
 fi
 
-echo "jcp: Compilation successful"
+echo "jcp: compilation successful"
 exit 0
