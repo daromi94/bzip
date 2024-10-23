@@ -13,7 +13,7 @@ vars:
 tasks:
   default:
     cmds:
-      - task --list-all
+      - task -a
 
   clean:
     cmds:
@@ -23,7 +23,7 @@ tasks:
     vars:
       SOURCE_DIR: src
     cmds:
-      - ./dev/jcp {{.SOURCE_DIR}} {{.CLASS_DIR}}
+      - dev/jcp {{.SOURCE_DIR}} {{.CLASS_DIR}}
 
   package:
     deps: [build]
