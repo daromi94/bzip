@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 readonly PROGRAM="jcp"
 
@@ -25,11 +25,9 @@ if [[ ! -d "$source_dir" ]]; then
     exit 66
 fi
 
-if [[ ! -d "$dest_dir" ]]; then
-    if ! mkdir -p "$dest_dir"; then
-        echo "$PROGRAM: $dest_dir: failed to create dest directory" >&2
-        exit 73
-    fi
+if [[ ! -d "$dest_dir" ]] && ! mkdir -p "$dest_dir"; then
+    echo "$PROGRAM: $dest_dir: failed to create dest directory" >&2
+    exit 73
 fi
 
 if ! find "$source_dir" -name '*.java' -exec javac {} -d "$dest_dir" \;; then

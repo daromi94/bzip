@@ -8,7 +8,7 @@ vars:
   BUILD_DIR: build
   CLASS_DIR: "{{.BUILD_DIR}}/classes"
   LIB_DIR: "{{.BUILD_DIR}}/lib"
-  PKG_FILE: "{{.LIB_DIR}}/{{.ARTIFACT_ID}}-{{.VERSION}}.jar"
+  PKG_PATH: "{{.LIB_DIR}}/{{.ARTIFACT_ID}}-{{.VERSION}}.jar"
 
 tasks:
   default:
@@ -28,7 +28,7 @@ tasks:
   package:
     deps: [build]
     cmds:
-      - jar -c -f {{.PKG_FILE}} -e {{.MAIN_CLASS}} -C {{.CLASS_DIR}} .
+      - jar -c -f {{.PKG_PATH}} -e {{.MAIN_CLASS}} -C {{.CLASS_DIR}} .
 
   build:run:
     deps: [build]
@@ -38,4 +38,4 @@ tasks:
   package:run:
     deps: [package]
     cmds:
-      - java -jar {{.PKG_FILE}}
+      - java -jar {{.PKG_PATH}}
