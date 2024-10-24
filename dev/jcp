@@ -35,5 +35,4 @@ if ! find "$source_dir" -name "*.java" -exec javac {} -d "$dest_dir" \;; then
     exit 70
 fi
 
-echo "$PROGRAM: compilation successful"
 exit 0
