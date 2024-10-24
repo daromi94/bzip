@@ -30,7 +30,7 @@ if [[ ! -d "$dest_dir" ]] && ! mkdir -p "$dest_dir"; then
     exit 73
 fi
 
-if ! find "$source_dir" -name '*.java' -exec javac {} -d "$dest_dir" \;; then
+if ! find "$source_dir" -name "*.java" -exec javac {} -d "$dest_dir" \;; then
     echo "$PROGRAM: compilation failed" >&2
     exit 70
 fi
