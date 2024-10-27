@@ -30,7 +30,7 @@ tasks:
 
   package:
     deps: [build]
-    cmd: jar -c -C {{.CLASS_DIR}} -e {{.MAIN_CLASS}} -f {{.PKG_PATH}} .
+    cmd: jar -c -f {{.PKG_PATH}} -e {{.MAIN_CLASS}} -C {{.CLASS_DIR}} .
 
   package:run:
     deps: [package]
