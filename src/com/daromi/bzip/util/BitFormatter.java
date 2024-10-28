@@ -2,6 +2,12 @@ package com.daromi.bzip.util;
 
 public final class BitFormatter {
 
+  private static final int BITS_IN_INT = 32;
+
+  private static final int BITS_IN_HEX_DIGIT = 4;
+
+  private static final int HEX_DIGITS_IN_INT = 8;
+
   private static final int BINARY_GROUP_SIZE = 4;
 
   private static final int HEX_GROUP_SIZE = 2;
@@ -19,7 +25,7 @@ public final class BitFormatter {
 
     final var sb = new StringBuilder();
 
-    for (int i = 31; i >= 0; i--) {
+    for (int i = BITS_IN_INT - 1; i >= 0; i--) {
       final var bit = (value >> i) & 0b1;
 
       sb.append(bit);
@@ -43,8 +49,8 @@ public final class BitFormatter {
 
     final var sb = new StringBuilder();
 
-    for (int i = 7; i >= 0; i--) {
-      final var hex = (value >> 4 * i) & 0xF;
+    for (int i = HEX_DIGITS_IN_INT - 1; i >= 0; i--) {
+      final var hex = (value >> BITS_IN_HEX_DIGIT * i) & 0xF;
 
       sb.append(Character.forDigit(hex, 16));
 
