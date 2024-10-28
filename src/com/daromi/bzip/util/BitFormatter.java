@@ -12,8 +12,8 @@ public final class BitFormatter {
     return toBinaryString(value, " ");
   }
 
-  public static String toBinaryString(final int value, final String sep) {
-    if (sep == null) {
+  public static String toBinaryString(final int value, final String separator) {
+    if (separator == null) {
       throw new IllegalArgumentException("separator cannot be null");
     }
 
@@ -25,7 +25,7 @@ public final class BitFormatter {
       sb.append(bit);
 
       if (i > 0 && i % BINARY_GROUP_SIZE == 0) {
-        sb.append(sep);
+        sb.append(separator);
       }
     }
 
@@ -36,8 +36,8 @@ public final class BitFormatter {
     return toHexString(value, " ");
   }
 
-  public static String toHexString(final int value, final String sep) {
-    if (sep == null) {
+  public static String toHexString(final int value, final String separator) {
+    if (separator == null) {
       throw new IllegalArgumentException("separator cannot be null");
     }
 
@@ -49,7 +49,7 @@ public final class BitFormatter {
       sb.append(Character.forDigit(hex, 16));
 
       if (i > 0 && i % HEX_GROUP_SIZE == 0) {
-        sb.append(sep);
+        sb.append(separator);
       }
     }
 
