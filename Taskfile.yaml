@@ -3,7 +3,7 @@ version: "3"
 vars:
   # Application
   ARTIFACT_ID: bzip
-  VERSION: 0.1.0
+  VERSION: 0.1.0-SNAPSHOT
   MAIN_CLASS: "com.daromi.{{.ARTIFACT_ID}}.cli.Main"
 
   # Build
@@ -22,16 +22,19 @@ tasks:
   build:
     vars:
       SOURCE_DIR: src
-    cmd: dev/jcp {{.SOURCE_DIR}} {{.CLASS_DIR}}
+    cmd: etc/jcp {{.SOURCE_DIR}} {{.CLASS_DIR}}
 
   build:run:
-    deps: [build]
+    deps:
+      - build
     cmd: java -cp {{.CLASS_DIR}} {{.MAIN_CLASS}}
 
   package:
-    deps: [build]
+    deps:
+      - build
     cmd: jar -c -f {{.PKG_PATH}} -e {{.MAIN_CLASS}} -C {{.CLASS_DIR}} .
 
   package:run:
-    deps: [package]
+    deps:
+      - package
     cmd: java -jar {{.PKG_PATH}}
