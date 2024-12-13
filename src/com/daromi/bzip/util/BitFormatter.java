@@ -1,5 +1,7 @@
 package com.daromi.bzip.util;
 
+import java.util.Objects;
+
 public final class BitFormatter {
 
   private static final int BITS_IN_INT = 32;
@@ -19,9 +21,7 @@ public final class BitFormatter {
   }
 
   public static String toBinaryString(final int value, final String separator) {
-    if (separator == null) {
-      throw new IllegalArgumentException("separator cannot be null");
-    }
+    Objects.requireNonNull(separator, "separator must not be null");
 
     final var sb = new StringBuilder();
 
@@ -43,9 +43,7 @@ public final class BitFormatter {
   }
 
   public static String toHexString(final int value, final String separator) {
-    if (separator == null) {
-      throw new IllegalArgumentException("separator cannot be null");
-    }
+    Objects.requireNonNull(separator, "separator must not be null");
 
     final var sb = new StringBuilder();
 
