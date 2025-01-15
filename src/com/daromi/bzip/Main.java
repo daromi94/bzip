@@ -1,4 +1,4 @@
-package com.daromi.bzip.cli;
+package com.daromi.bzip;
 
 final class Main {
 

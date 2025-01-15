@@ -1,11 +1,15 @@
 # Build
 build
 
-# IntelliJ IDEA
+# Editors
+
+## IntelliJ IDEA
 .idea
 
-# Visual Studio Code
+## Visual Studio Code
 .vscode
 
-# macOS
+# OS
+
+## macOS
 .DS_Store

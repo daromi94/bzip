@@ -4,7 +4,7 @@ vars:
   # Application
   ARTIFACT_ID: bzip
   VERSION: 0.1.0-SNAPSHOT
-  MAIN_CLASS: "com.daromi.{{.ARTIFACT_ID}}.cli.Main"
+  MAIN_CLASS: "com.daromi.{{.ARTIFACT_ID}}.Main"
 
   # Build
   BUILD_DIR: build
